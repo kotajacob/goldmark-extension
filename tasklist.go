@@ -1,6 +1,8 @@
 package extension
 
 import (
+	"regexp"
+
 	"github.com/yuin/goldmark"
 	gast "github.com/yuin/goldmark/ast"
 	"github.com/yuin/goldmark/extension/ast"
@@ -9,7 +11,6 @@ import (
 	"github.com/yuin/goldmark/renderer/html"
 	"github.com/yuin/goldmark/text"
 	"github.com/yuin/goldmark/util"
-	"regexp"
 )
 
 var taskListRegexp = regexp.MustCompile(`^\[([\sxX])\]\s*`)
@@ -87,9 +88,9 @@ func (r *TaskCheckBoxHTMLRenderer) renderTaskCheckBox(w util.BufWriter, source [
 	n := node.(*ast.TaskCheckBox)
 
 	if n.IsChecked {
-		w.WriteString(`<input checked="" disabled="" type="checkbox"`)
+		w.WriteString(`<input checked="" type="checkbox"`)
 	} else {
-		w.WriteString(`<input disabled="" type="checkbox"`)
+		w.WriteString(`<input type="checkbox"`)
 	}
 	if r.XHTML {
 		w.WriteString(" /> ")
